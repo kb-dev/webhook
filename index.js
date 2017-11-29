@@ -50,6 +50,7 @@ app.post("/", function(req, res) {
 
         default:
             res.status(400).send("Event not supported : " + command);
-            console.log("Event not supported : " + command);
+            console.log("Event not supported : " + req.headers["X-Github-Event"]);
+            console.log(JSON.stringify(req.headers));
     }
 });

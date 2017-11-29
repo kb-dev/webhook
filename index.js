@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const xhub = require("express-x-hub");
 const settings = require('./settings');
 
-const port = "8085";
+const port = "3001";
 const host = "localhost";
 
 //Secret key

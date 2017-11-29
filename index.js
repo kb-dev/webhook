@@ -29,7 +29,7 @@ app.post("/", function(req, res) {
         return;
     }
 
-    let command = req.headers["X-GitHub-Event"];
+    let command = req.headers["X-Github-Event"];
 
     switch (command) {
         //Event create (Branch, or tag created)

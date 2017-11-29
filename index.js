@@ -7,13 +7,10 @@ const settings = require('./settings');
 const port = "3001";
 const host = "localhost";
 
-//Secret key
 app.use(xhub({ algorithm: "sha1", secret: settings.xhubSecret }));
 
-// Configure express json
 app.use(bodyParser.json());
 
-// Main : Start the express http server
 let server = app.listen(port, host, function() {
     console.log(
         server.address().address,
@@ -21,7 +18,6 @@ let server = app.listen(port, host, function() {
     );
 });
 
-// Add default route
 app.post("/", function(req, res) {
     if (!req.isXHubValid()) {
         res.status(400).send("Invalid X-Hub Request");
@@ -32,10 +28,15 @@ app.post("/", function(req, res) {
     let command = req.headers["x-github-event"];
 
     switch (command) {
-        //Event create (Branch, or tag created)
         case "push":
-            console.log("Create event");
-            console.log(JSON.stringify(req.body.repository));
+            let repo = req.body.repository.full_name;
+            switch (repo){
+                case 'kb-dev/webhook':
+                    res.status(400).send("Push received");
+                    break;
+                default:
+                    res.status(400).send("Push for "+repo+" is not configured.");
+            }
             break;
 
         case "ping":

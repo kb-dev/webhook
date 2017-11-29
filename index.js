@@ -29,7 +29,7 @@ app.post("/", function(req, res) {
         return;
     }
 
-    let command = req.headers["x-github-event"];
+    let command = req.headers["X-GitHub-Event"];
 
     switch (command) {
         //Event create (Branch, or tag created)
@@ -44,8 +44,12 @@ app.post("/", function(req, res) {
             console.log("Release Event");
             break;
 
+        case "ping":
+            res.status(200).send("Ping received");
+            break;
+
         default:
             res.status(400).send("Event not supported : " + command);
-            console.log("Event not supported : " + req.headers["X-Github-Event"]);
+            console.log("Event not supported : " + command);
     }
 });

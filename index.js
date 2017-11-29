@@ -33,15 +33,9 @@ app.post("/", function(req, res) {
 
     switch (command) {
         //Event create (Branch, or tag created)
-        case "create":
-            res.send("Event create trigger");
+        case "push":
             console.log("Create event");
-            break;
-
-        //Event release (Release published in a repository)
-        case "release":
-            res.send("Event release trigger");
-            console.log("Release Event");
+            console.log(JSON.stringify(req.body.repository));
             break;
 
         case "ping":

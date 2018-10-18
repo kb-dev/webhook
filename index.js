@@ -45,6 +45,16 @@ app.post("/", function (req, res) {
                         }
                     });
                     break;
+                case 'kb-dev/Talkien':
+                    exec('cd /home/Talkien && git pull', (err) => {
+                        if (err) {
+                            res.status(500).send(`Push received on website with error ${err}`);
+                            return;
+                        } else {
+                            res.status(200).send("Push received on website and pull");
+                        }
+                    });
+                    break;
                 default:
                     res.status(400).send("Push for " + repo + " is not configured.");
             }

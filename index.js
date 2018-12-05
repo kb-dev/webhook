@@ -55,6 +55,16 @@ app.post("/", function (req, res) {
                         }
                     });
                     break;
+                case 'kb-dev/ndi2018':
+                    exec('cd /var/www/ndi2018 && git pull', (err) => {
+                        if (err) {
+                            res.status(500).send(`Push received on ndi2018 with error ${err}`);
+                            return;
+                        } else {
+                            res.status(200).send("Push received on ndi2018 and pull");
+                        }
+                    });
+                    break;
                 default:
                     res.status(400).send("Push for " + repo + " is not configured.");
             }

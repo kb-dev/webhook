@@ -10,8 +10,8 @@ const host = "localhost";
 
 app.use(xhub({algorithm: "sha1", secret: settings.xhubSecret}));
 
-app.use(bodyParser.json({limit: '10mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+app.use(bodyParser.json({limit: '100mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 
 let server = app.listen(port, host, function () {
     console.log(
@@ -67,7 +67,7 @@ app.post("/", function (req, res) {
                     });
                     break;
                 default:
-                    res.status(400).send("Push for " + repo + " is not configured.");
+                    res.status(204).send("Push for " + repo + " is not configured.");
             }
             break;
 
